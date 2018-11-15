@@ -97,4 +97,10 @@ function bucketSort(arr, min, max) {
   return ret;
 }
 
-console.log('bucketSort: ', bucketSort(dataset, 2, 98));
+// console.log('bucketSort: ', bucketSort(dataset, 1, 98));
+
+function shuffle(arr) {
+  for (let i=0; i<arr.length; i++) {
+    swap(arr, i, Math.floor(Math.random() * arr.length));
+  }
+}
