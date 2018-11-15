@@ -75,3 +75,26 @@ function mergeSort(arr) {
 }
 
 // console.log('MergeSort: ', mergeSort(dataset));
+
+function bucketSort(arr, min, max) {
+  // Create bucket for each number between min and max
+  const bucket = [];
+  const ret = [];
+  for (let i=0; i<=max-min; i++) {
+    bucket[i] = 0;
+  }
+
+  arr.forEach(num => {
+    bucket[num-min]++;
+  });
+
+  bucket.forEach((count, i) => {
+    for (let j=0; j<count; j++) {
+      ret.push(i+min);
+    }
+  });
+
+  return ret;
+}
+
+console.log('bucketSort: ', bucketSort(dataset, 2, 98));
