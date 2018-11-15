@@ -156,3 +156,62 @@ function sortBooks(books) {
 }
 
 console.log(sortBooks(books));
+
+function countQuickSort(arr) {
+  let count = 0;
+  quickSort(arr);
+  function quickSort(arr, start=0, end=arr.length) {
+    count++;
+    // General case
+    if (start >= end) {
+      return arr;
+    }
+
+    // Choose a pivot
+    const pivot = arr[end - 1];
+
+    // Partition the array
+    let j = start;
+    for (let i=start; i<end - 1; i++) {
+      if (arr[i] <= pivot) {
+        swap(arr, i, j);
+        j++;
+      }
+    }
+
+    // Move pivot to middle
+    swap(arr, end-1, j);
+
+    // Run quicksort on both side of the pivot recursively
+    arr = quickSort(arr, start, j);
+    arr = quickSort(arr, j+1, end);
+
+    // Return sorted array
+    return arr;
+  }
+  return count;
+}
+
+console.log(countQuickSort(dataset));
+console.log(countMergeSort(dataset));
+
+function countMergeSort(arr) {
+  let count = 0;
+  mergeSort(arr);
+  function mergeSort(arr) {
+    count++;
+    // Split array in half recursively
+    if (arr.length < 2) {
+      return arr;
+    }
+
+    const middle = Math.floor(arr.length/2);
+    const left = mergeSort(arr.slice(0, middle));
+    const right = mergeSort(arr.slice(middle));
+    // Merge arrays together
+    // Return array
+    return merge(left, right, arr);
+  }
+
+  return count;
+}
