@@ -104,3 +104,55 @@ function shuffle(arr) {
     swap(arr, i, Math.floor(Math.random() * arr.length));
   }
 }
+
+const books = ['The Lord of the Rings',
+  'Le Petit Prince',
+  'Harry Potter and the Philosopher\'s Stone',
+  'The Hobbit',
+  'And Then There Were None',
+  'Alice\'s Adventures in Wonderland',
+  'She: A History of Adventure',
+  'You Can Heal Your Life',
+  'Cien años de soledad',
+  'Lolita',
+  'Heidis Lehr- und Wanderjahre',
+  'Black Beauty',
+  'Charlotte\'s Web',
+  'Watership Down',
+  'Il Nome della Rosa',
+  'Jonathan Livingston Seagull',
+  'Flowers in the Attic',
+  'Kane and Abel',
+  'Valley of the Dolls',
+  'Gone with the Wind'];
+
+// Sorting books
+// input: 20 books in random order
+// output: 20 books sorted in alphabetical order
+// organanize books by starting character(A-Z)
+// sort the books again
+function sortBooks(books) {
+  const bookMap = {};
+  const chars = 'abcdefghijklmnopqrstuvwxyz';
+  let ret = [];
+  books.forEach(book => {
+    if (bookMap[book[0].toLowerCase()]) {
+      bookMap[book[0].toLowerCase()] = [...bookMap[book[0].toLowerCase()], book];
+    } else {
+      bookMap[book[0].toLowerCase()] = [book];
+    }
+  });
+
+  for (let i=0; i<chars.length; i++) {
+    let charBooks = bookMap[chars[i]];
+    if (charBooks) {
+      if (charBooks.length > 1) {
+        charBooks = quickSort(charBooks);
+      }
+      ret = [...ret, ...charBooks];
+    }
+  }
+  return ret;
+}
+
+console.log(sortBooks(books));
